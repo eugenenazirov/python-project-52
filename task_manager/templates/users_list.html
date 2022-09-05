@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="container wrapper flex-grow-1">
+        <br>
+        <h1>{% translate "Пользователи" %}</h1>
+        <br>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{% translate "ID" %}</th>
+                        <th>{% translate "Имя пользователя" %}</th>
+                        <th>{% translate "Полное имя" %}</th>
+                        <th>{% translate "Дата создания" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in object_list %}
+                    <tr>
+                        <td>{{u.id}}</td>
+                        <td>{{u.username}}</td>
+                        <td>{{u.first_name}} {{u.last_name}}</td>
+                        <td>{{u.date_joined}}</td>
+                        <td>
+                            <a href="{% url 'users_update' pk=u.id %}">{% translate "Изменить" %}</a>
+                            <br>
+                            <a href="{% url 'users_delete' pk=u.id %}">{% translate "Удалить" %}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

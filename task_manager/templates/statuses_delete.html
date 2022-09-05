@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container wrapper flex-grow-1">
+    <h1>{% translate "Удаление статуса" %}</h1>
+    <br>
+    <form method="post">{% csrf_token %}
+        <p>{% translate "Вы действительно хотите удалить статус" %} "{{ object }}"?</p>
+        {% bootstrap_form form%}
+        {% buttons submit="Да, удалить" %}
+        {% endbuttons %}
+    </form>
+</div>
+{% endblock %}

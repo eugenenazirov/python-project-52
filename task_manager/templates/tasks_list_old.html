@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="container wrapper flex-grow-1">
+        <br>
+        <h1>{% translate "Задачи" %}</h1>
+        <br>
+
+        <a href="{% url 'tasks_create' %}">{% translate "Создать задачу" %}</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{% translate "ID" %}</th>
+                    <th>{% translate "Имя" %}</th>
+                    <th>{% translate "Статус" %}</th>
+                    <th>{% translate "Автор" %}</th>
+                    <th>{% translate "Исполнитель" %}</th>
+                    <th>{% translate "Дата создания" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in object_list %}
+                <tr>
+                    <td>{{t.id}}</td>
+                    <td><a href="{% url 'tasks_detail' pk=t.id %}"> {{t.name}} </a></td>
+                    <td>{{t.status.name}}</td>
+                    <td>{{t.author.username}}</td>
+                    <td>{{t.executor.username}}</td>
+                    <td>{{t.time_create}}</td>
+                    <td>
+                        <a href="{% url 'tasks_update' pk=t.id %}">{% translate "Изменить" %}</a>
+                        <br>
+                        <a href="{% url 'tasks_delete' pk=t.id %}">{% translate "Удалить" %}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

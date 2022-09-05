@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="container wrapper flex-grow-1">
+        <br>
+        <h1>{% translate "Статусы" %}</h1>
+        <br>
+
+        <div class="table-responsive">
+            <a href="{% url 'statuses_create' %}">{% translate "Создать статус" %}</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{% translate "ID" %}</th>
+                        <th>{% translate "Имя" %}</th>
+                        <th>{% translate "Дата создания" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in object_list %}
+                    <tr>
+                        <td>{{s.id}}</td>
+                        <td>{{s.name}}</td>
+                        <td>{{s.time_create}}</td>
+                        <td>
+                            <a href="{% url 'statuses_update' pk=s.id %}">{% translate "Изменить" %}</a>
+                            <br>
+                            <a href="{% url 'statuses_delete' pk=s.id %}">{% translate "Удалить" %}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

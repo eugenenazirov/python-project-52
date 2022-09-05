@@ -1,0 +1,63 @@
+{% load i18n %}
+
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+
+{% block bootstrap4_content %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">{% translate "Менеджер задач" %}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users_list' %}">{% translate "Пользователи" %}<span class="sr-only"></span></a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'statuses_list' %}">{% translate "Статусы" %}<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tasks_list' %}">{% translate "Задачи" %}<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'labels_list' %}">{% translate "Метки" %}<span class="sr-only"></span></a>
+                </li>                      
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users_update' pk=request.user.id %}">{{user.username}}<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_logout' %}">{% translate "Выход" %}<span class="sr-only"></span></a>
+                </li>
+                {% else %}              
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_login' %}">{% translate "Вход" %}<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users_create' %}">{% translate "Регистрация" %}<span class="sr-only"></span></a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+{% bootstrap_messages %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <h1>Просмотр задачи</h1>
+        <h2 class="p-3 mb-2 bg-primary text-white">{{ task_detail.name }}</h2>
+        <div class="p-3 mb-2 bg-light text-dark">
+            <h3>{{ task_detail.description }}</h3>
+            <div class="dropdown-divider" style="border-color: rgb(223, 220, 220)"></div>
+            <br>
+            <div class="row">
+            <div class="col">
+                <p>{% translate "Автор" %}:</p>
+            </div>
+            <div class="col">
+                <p>{{ task_detail.author.first_name }} {{ task_detail.author.last_name }}</p>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <p>{% translate "Исполнитель" %}:</p>
+                </div>
+                <div class="col">
+                <p>{{ task_detail.executor.first_name }} {{ task_detail.executor.last_name }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <p>{% translate "Статус" %}:</p>
+                </div>
+                <div class="col">
+                <p>{{ task_detail.status }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <p>{% translate "Дата создания" %}:</p>
+                </div>
+                <div class="col">
+                <p>{{ task_detail.time_create }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <p>{% translate "Метки" %}:</p>
+                <ul>
+                    {% for l in task_detail.labels.all %}
+                    <li> {{ l.name }} </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            </div>
+            <br>
+            <a href="{% url 'tasks_update' pk=task_detail.id %}">{% translate "Изменить" %}</a>
+            <a href="{% url 'tasks_delete' pk=task_detail.id %}">{% translate "Удалить" %}</a>
+        </div>
+    </div>
+{% endblock %}
