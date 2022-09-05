@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import rollbar
 from dotenv import load_dotenv
+import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -147,3 +149,6 @@ ROLLBAR = {
 }
 
 rollbar.init(**ROLLBAR)
+
+
+django_heroku.settings(locals())
