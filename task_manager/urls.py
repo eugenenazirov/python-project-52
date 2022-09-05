@@ -19,7 +19,7 @@ from task_manager import views
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="base.html"), name='home'),
+    path('', TemplateView.as_view(template_name="index.html"), name='home'),
     path('users/', views.UserList.as_view(), name='users_list'),
     path('users/<int:pk>/details/', views.UsersDetail.as_view(), name='users_details'),
     path('users/create/', views.UserCreate.as_view(), name='users_create'),
