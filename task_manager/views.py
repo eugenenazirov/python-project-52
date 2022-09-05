@@ -16,11 +16,8 @@ from django_filters.views import FilterView
 from .mixins import MyLoginRequiredMixin, MyUserPermissionMixin, MyTaskPermissionMixin
 
 
-def base(request):
-    return render(request, 'base.html', context={})
-
-# class BaseView(TemplateView):
-#     template_name: str = 'base.html'
+class BaseView(TemplateView):
+    template_name: str = 'base.html'
 
 
 class UserList(ListView):
