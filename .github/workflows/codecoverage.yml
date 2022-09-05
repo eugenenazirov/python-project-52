@@ -1,0 +1,40 @@
+name: CI (linter, tests and code coverage)
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  Code-coverage:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+        poetry-version: ["1.1.13"]
+        pytest-version: ["7.1.2"]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+        # make depends on poetry
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install dependencies
+        run: |
+          make install
+      - name: Run pytest
+        run: |
+          make test
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CC_TEST_REPORTER_ID: a410ec489efecf1667b11dfc05562a89b7f15bbbc626b0840fbf395b7ebda8fe
+        with:
+          coverageCommand: make test-coverage
+          debug: true
