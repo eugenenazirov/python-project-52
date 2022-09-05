@@ -5,6 +5,9 @@ gunicorn:
 	export DJANGO_SETTINGS_MODULE=task_manager.settings
 	poetry run gunicorn task_manager.wsgi
 
+shell:
+	poetry run python manage.py shell_plus
+
 install:
 	poetry install
 
