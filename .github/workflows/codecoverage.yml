@@ -35,6 +35,8 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.4
         env:
           CC_TEST_REPORTER_ID: a410ec489efecf1667b11dfc05562a89b7f15bbbc626b0840fbf395b7ebda8fe
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          ACCESS_TOKEN_ROLLBAR: ${{ secrets.ACCESS_TOKEN_ROLLBAR }}
         with:
           coverageCommand: make test-coverage
           debug: true
