@@ -6,7 +6,7 @@ gunicorn:
 	poetry run gunicorn task_manager.wsgi
 
 shell:
-	poetry run python manage.py shell_plus
+	poetry run python manage.py shell
 
 install:
 	poetry install
