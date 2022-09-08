@@ -53,7 +53,7 @@ class TestUser(TestCase):
 
         assert response.url == "/login/"
         assert response.status_code == 302
-        assert user.first_name == "Eugene"
+        assert user.first_name == "Darya"
 
     def test_deleting_user(self):
         self.client.login(username='test_user', password='12345')

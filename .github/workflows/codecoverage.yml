@@ -38,5 +38,5 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN_ROLLBAR: ${{ secrets.ACCESS_TOKEN_ROLLBAR }}
         with:
-          coverageCommand: make test-coverage
+          coverageCommand: make test-cov
           debug: true
