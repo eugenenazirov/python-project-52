@@ -28,4 +28,7 @@ jobs:
         run: |
           make install
       - name: Run Tests
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          ACCESS_TOKEN_ROLLBAR: ${{ secrets.ACCESS_TOKEN_ROLLBAR }}
         run: make test
