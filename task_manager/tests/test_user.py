@@ -7,7 +7,7 @@ class TestUser(TestCase):
     def setUp(self):
         self.client = Client()
 
-        user = User.objects.create(username='test_user', first_name="Alexander")
+        user = User.objects.create(username='test_user', first_name="Eugene")
         user.set_password('12345')
         user.save()
 
@@ -32,7 +32,7 @@ class TestUser(TestCase):
         self.client.post(reverse('users_update', args=[1]), {
             'username': 'DarNaz',
             'first_name': 'Darya',
-            'last_name': 'Naz',
+            'last_name': 'Nazirova',
             'password1': 'pss12asddaSA',
             'password2': 'pss12asddaSA'
         })
@@ -53,7 +53,7 @@ class TestUser(TestCase):
 
         assert response.url == "/login/"
         assert response.status_code == 302
-        assert user.first_name == "Darya"
+        assert user.first_name == "Eugene"
 
     def test_deleting_user(self):
         self.client.login(username='test_user', password='12345')
