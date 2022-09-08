@@ -28,9 +28,9 @@ jobs:
       - name: Install dependencies
         run: |
           make install
-      - name: Run pytest
-        run: |
-          make test
+      # - name: Run pytest
+      #   run: |
+      #     make test
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.4
         env:
