@@ -150,5 +150,7 @@ ROLLBAR = {
 
 rollbar.init(**ROLLBAR)
 
+IS_HEROKU = os.getenv("IS_HEROKU")
 
-# django_heroku.settings(locals())
+if IS_HEROKU:
+    django_heroku.settings(locals())
