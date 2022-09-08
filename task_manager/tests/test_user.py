@@ -17,34 +17,34 @@ class TestUser(TestCase):
 
     def test_creating_user(self):
         self.client.post(reverse('users_create'), {
-            'username': 'AlIz',
-            'first_name': 'Alexander',
-            'last_name': 'Izmailov',
+            'username': 'EuNaz',
+            'first_name': 'Eugene',
+            'last_name': 'Nazirov',
             'password1': 'pss12asddaSA',
             'password2': 'pss12asddaSA'
         })
         user = User.objects.get(id=2)
-        assert user.username == "AlIz"
+        assert user.username == "EuNaz"
 
     def test_updating_user(self):
         self.client.login(username='test_user', password='12345')
 
         self.client.post(reverse('users_update', args=[1]), {
-            'username': 'AlIz',
-            'first_name': 'Alexander_2',
-            'last_name': 'Izmailov',
+            'username': 'DarNaz',
+            'first_name': 'Darya',
+            'last_name': 'Naz',
             'password1': 'pss12asddaSA',
             'password2': 'pss12asddaSA'
         })
 
         user = User.objects.get(id=1)
-        assert user.first_name == "Alexander_2"
+        assert user.first_name == "Darya"
 
     def test_updating_user_without_auth(self):
         response = self.client.post(reverse('users_update', args=[1]), {
-            'username': 'AlIz',
-            'first_name': 'Alexander_2',
-            'last_name': 'Izmailov',
+            'username': 'EuNaz',
+            'first_name': 'Eugene',
+            'last_name': 'Nazirov',
             'password1': 'pss12asddaSA',
             'password2': 'pss12asddaSA'
         })
@@ -53,7 +53,7 @@ class TestUser(TestCase):
 
         assert response.url == "/login/"
         assert response.status_code == 302
-        assert user.first_name == "Alexander"
+        assert user.first_name == "Eugene"
 
     def test_deleting_user(self):
         self.client.login(username='test_user', password='12345')
